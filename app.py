@@ -82,7 +82,7 @@ def secret_message():
 @app.route('/message_results', methods=['POST'])
 def message_results():
     """Shows the user their message, with the letters in sorted order."""
-    pass
+    users_secret_message = request.form('message')
 
 
 @app.route('/calculator')
