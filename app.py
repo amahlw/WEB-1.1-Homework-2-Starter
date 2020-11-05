@@ -26,7 +26,7 @@ def choose_froyo():
         What is youre favorite toppings?
         <input type="text" name="toppings">
         <input type="submit" value="Submit!">
-        
+
     </form>
     """
 
@@ -41,20 +41,42 @@ def show_froyo_results():
 @app.route('/favorites')
 def favorites():
     """Shows the user a form to choose their favorite color, animal, and city."""
-    pass
+    return """
+    <form action="/favorite_results" method="GET">
+        What is your favorite color? <br/>
+        <input type="textbox" name="color"><br/>
+        What is youre favorite animal?
+        <input type="text" name="animal">
+        What is youre favorite city?
+        <input type="text" name="city">
+        <input type="submit" value="Submit!">
+
+    </form>
+    """
 
 
 @app.route('/favorites_results')
 def favorites_results():
     """Shows the user a nice message using their form results."""
-    pass
+
+    users_favorites_color = request.args.get('color')
+    users_favorites_animal = request.args.get('animal')
+    users_favorites_city = request.args.get('city')
+    return f'Wow, I didnt know {users_favorites_color} {users_favorites_animal} lived in {users_favorites_city}!'
 
 
 @app.route('/secret_message')
 def secret_message():
     """Shows the user a form to collect a secret message. Sends the result via
     the POST method to keep it a secret!"""
-    pass
+    return """
+    <form action="/secret_message" method="POST">
+    What's your main secret ? <br/>
+    <input type="text" name="message"
+    <br/>  <br/>
+    <input type="submit" value="Submit">
+    </form>
+    """
 
 
 @app.route('/message_results', methods=['POST'])
@@ -67,18 +89,18 @@ def message_results():
 def calculator():
     """Shows the user a form to enter 2 numbers and an operation."""
     return """
-    <form action="/calculator_results" method="GET">
-        Please enter 2 numbers and select an operator.<br/><br/>
-        <input type="number" name="operand1">
-        <select name="operation">
-            <option value="add">+</option>
-            <option value="subtract">-</option>
-            <option value="multiply">*</option>
-            <option value="divide">/</option>
-        </select>
-        <input type="number" name="operand2">
-        <input type="submit" value="Submit!">
-    </form>
+    <form action = "/calculator_results" method = "GET" >
+        Please enter 2 numbers and select an operator. < br/> < br/>
+        <input type = "number" name = "operand1" >
+        <select name = "operation" >
+            <option value = "add" > + < /option >
+            <option value = "subtract" > - < /option >
+            <option value = "multiply" > * < /option >
+            <option value = "divide" > / < /option >
+        </select >
+        <input type = "number" name = "operand2" >
+        <input type = "submit" value = "Submit!" >
+    </form >
     """
 
 
