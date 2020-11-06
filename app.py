@@ -110,7 +110,11 @@ def calculator():
 @app.route('/calculator_results')
 def calculator_results():
     """Shows the user the result of their calculation."""
-    pass
+    user_calculator1 = int(request.args.get("operand1"))
+    user_calculator2 = int(request.args.get("operand2"))
+    user_results = int(request.args.get("operand2"))
+
+    return f"You're chosse to add {user_calculator1} and {user_calculator2}.Your results is { user_results }"
 
 
 # List of compliments to be used in the `compliments_results` route (feel free
