@@ -70,9 +70,9 @@ def secret_message():
     """Shows the user a form to collect a secret message. Sends the result via
     the POST method to keep it a secret!"""
     return """
-    <form action="/secret_message" method="POST">
+    <form action="/message_results" method="POST">
     What's your main secret ? <br/>
-    <input type="text" name="message"
+    <input type="text" name="message">
     <br/>  <br/>
     <input type="submit" value="Submit">
     </form>
@@ -82,7 +82,9 @@ def secret_message():
 @app.route('/message_results', methods=['POST'])
 def message_results():
     """Shows the user their message, with the letters in sorted order."""
-    users_secret_message = request.form('message')
+    users_secret_message = request.form.get('message')
+
+    return f"this is your {users_secret_message}!"
 
 
 @app.route('/calculator')
