@@ -91,30 +91,34 @@ def message_results():
 @app.route('/calculator')
 def calculator():
     """Shows the user a form to enter 2 numbers and an operation."""
-    return """
-    <form action = "/calculator_results" method = "GET" >
-        Please enter 2 numbers and select an operator. < br/> < br/>
-        <input type = "number" name = "operand1" >
-        <select name = "operation" >
-            <option value = "add" > + < /option >
-            <option value = "subtract" > - < /option >
-            <option value = "multiply" > * < /option >
-            <option value = "divide" > / < /option >
-        </select >
-        <input type = "number" name = "operand2" >
-        <input type = "submit" value = "Submit!" >
-    </form >
-    """
+    return render_template("calculator_form.html")
 
 
 @app.route('/calculator_results')
 def calculator_results():
     """Shows the user the result of their calculation."""
-    user_calculator1 = int(request.args.get("operand1"))
-    user_calculator2 = int(request.args.get("operand2"))
-    user_results = int(request.args.get("operand2"))
+    operand1 = int(request.args.get("operand1"))
+    operand2 = int(request.args.get("operand2"))
+    operation = request.args.get("operation")
+    results = 0
 
-    return f"You're chosse to add {user_calculator1} and {user_calculator2}.Your results is { user_results }"
+    if operation == "add":
+        results = operand1 + operand2
+    elif operation == "subtract":
+        results = operand1 - operand2
+    elif operation == "divide":
+        results = operand1 / operand2
+    elif operation == "multiply":
+        results = operand1 * operand2
+
+    context = {
+        "operand1": operand1,
+        "operand2": operand2,
+        "results": results,
+        "operation": operation
+    }
+
+    return render_template("calculator_results.html", **context)
 
 
 # List of compliments to be used in the `compliments_results` route (feel free
